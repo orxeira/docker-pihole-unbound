@@ -32,4 +32,18 @@ services:
     volumes:
       - etc_pihole-unbound:/etc/pihole:rw
       - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
+    networks:
+      macvlan:
+        ipv4_address: ${PIHOLE_MACVLAN_IP}
     restart: unless-stopped
+    
+networks:
+  macvlan:
+    driver: macvlan
+    driver_opts:
+      parent: ${NETWORK_INTERFACE}
+    ipam:
+      config:
+        - subnet: ${MACVLAN_SUBNET}
+          gateway: ${MACVLAN_GATEWAY}
+          ip_range: ${MACVLAN_IP_RANGE}
