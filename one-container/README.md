@@ -24,13 +24,18 @@ First create a `.env` file to substitute variables for your deployment.
 | `REV_SERVER_TARGET` | unset | Router's IP | If conditional forwarding is enabled, set the IP of the local network router |
 | `REV_SERVER_CIDR` | unset | Reverse DNS | If conditional forwarding is enabled, set the reverse DNS zone (e.g. `192.168.0.0/24`) |
 | `WEBTHEME` | `default-light` | `<"default-dark"\|"default-darker"\|"default-light"\|"default-auto"\|"lcars">`| User interface theme to use.
+| `PIHOLE_MACVLAN_IP` | `192.168.0.4` | MACVLAN IP address | Enter the first assignable IP address MacVLAN subnet you created.
+| `NETWORK_INTERFACE` | `eth0` | Network interface | The name of the network interface
+| `MACVLAN_SUBNET` | `192.168.0.0/24` | Subnet for the MacVLAN | `<Enter the LAN network>/24`
+| `MACVLAN_GATEWAY` | `192.168.0.1` | LAN Gateway for the MacVLAN | `<Enter the LAN Gateway>`
+| `MACVLAN_IP_RANGE` | `192.168.0.4/32` | IP range for the MacVLAN | `<Enter the IP address of the LAN subnet that the MacVLAN network will use>/32`
 
 Example `.env` file in the same directory as your `docker-compose.yaml` file:
 
 ```
 FTLCONF_LOCAL_IPV4=192.168.1.10
-TZ=America/Los_Angeles
-WEBPASSWORD=QWERTY123456asdfASDF
+TZ=Europe/Madrid
+WEBPASSWORD=test123!
 REV_SERVER=true
 REV_SERVER_DOMAIN=local
 REV_SERVER_TARGET=192.168.1.1
@@ -38,7 +43,12 @@ REV_SERVER_CIDR=192.168.0.0/16
 HOSTNAME=pihole
 DOMAIN_NAME=pihole.local
 PIHOLE_WEBPORT=80
-WEBTHEME=default-light
+WEBTHEME=default-dark
+PIHOLE_MACVLAN_IP=192.168.0.4
+NETWORK_INTERFACE=eth0
+MACVLAN_SUBNET=192.168.1.0/24
+MACVLAN_GATEWAY=192.168.1.1
+MACVLAN_IP_RANGE=192.168.1.4/32
 ```
 
 ### Using Portainer stacks?
